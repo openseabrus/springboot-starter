@@ -51,11 +51,11 @@ jobs:
           
       - run:
           name: Build Docker Image
-          command: ./gradlew bootRepackage -Pprod buildDocker
+          command: ./gradlew bootBuildImage
       
-      # - run: docker build -t open1904/springboot:latest .
+      - run: docker build -t open1904/springboot:latest .
       
-      # - run: docker push open1904/springboot:latest
+      - run: docker push open1904/springboot:latest
       
       - store_artifacts:
           path: build/libs
