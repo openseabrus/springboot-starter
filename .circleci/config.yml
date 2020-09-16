@@ -50,6 +50,10 @@ jobs:
       - setup_remote_docker
           
       - run:
+          name: Build
+          command: ./gradlew build
+          
+      - run:
           name: Build Docker Image
           command: ./gradlew bootBuildImage
       
