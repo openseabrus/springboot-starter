@@ -44,7 +44,7 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
           
-      - run: gradle bootBuildImage
+      - run: gradle bootBuildImage --debug
       
       - run: docker build -t open1904/springboot:latest .
       
