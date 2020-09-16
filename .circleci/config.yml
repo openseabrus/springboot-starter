@@ -22,8 +22,13 @@ jobs:
       TERM: dumb
 
     steps:
-      - setup_remote_docker
       - checkout
+      
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Login to DockerHub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
 
       # Download and cache dependencies
       - restore_cache:
@@ -38,6 +43,16 @@ jobs:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
+          
+      - run: gradlew bootBuildImage
+      
+      - run: docker build -t open1904/springboot:latest .
+      
+      - run: docker push open1904/springboot:latest
 
       # run tests!
       - run: gradle test
+      
+      - store_artifacts:
+          path: build/libs
+          destination: techtalk
