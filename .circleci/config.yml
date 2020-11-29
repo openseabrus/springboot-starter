@@ -55,7 +55,7 @@ jobs:
           
       - run:
           name: Build Docker Image
-          command: ./gradlew bootBuildImage --imageName=open1904/springboot:latest
+          command: ./gradlew bootBuildImage --imageName=open1904/springboot
       
       - run: docker push open1904/springboot:latest
       
